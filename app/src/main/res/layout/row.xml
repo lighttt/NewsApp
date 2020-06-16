@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/img_iv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_tv"
+            android:text="@string/title_news"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/img_iv"
+            android:layout_toEndOf="@+id/img_iv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:scrollHorizontally="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/discryption_tv"
+            android:text="@string/title_des"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/img_iv"
+            android:layout_toEndOf="@+id/img_iv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/title_tv"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:scrollHorizontally="false"
+            />
+
+        <TextView
+            android:id="@+id/date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="114dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="-196dp"
+            android:layout_toStartOf="@+id/title_tv"
+            android:layout_toRightOf="@+id/title_tv"
+            android:text="@string/title_date"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
