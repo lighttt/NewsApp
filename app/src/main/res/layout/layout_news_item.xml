@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_iv"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:layout_weight="0.3"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_weight="0.7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_tv"
+                android:text="@string/title_news"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:justificationMode="inter_word"
+                style="@style/TextAppearance.AppCompat.Title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/discryption_tv"
+                android:text="@string/title_des"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:justificationMode="inter_word"
+                style="@style/TextAppearance.AppCompat.Caption"/>
+
+            <TextView
+                android:layout_gravity="end"
+                android:id="@+id/date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_date"
+                android:layout_marginTop="10dp"
+                style="@style/TextAppearance.AppCompat.Caption"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -2,13 +2,15 @@ package com.example.newsapp;
 
 public class NewsItem {
     String title;
-    String descryption;
-    String imgurl;
+    String description;
+    String imgURL;
+    String date;
 
-    public NewsItem(String title, String descryption, String imgurl) {
+    public NewsItem(String title, String description, String imgURL, String date) {
         this.title = title;
-        this.descryption = descryption;
-        this.imgurl = imgurl;
+        this.description = description;
+        this.imgURL = imgURL;
+        this.date = date;
     }
 
     public String getTitle() {
@@ -19,19 +21,27 @@ public class NewsItem {
         this.title = title;
     }
 
-    public String getDescryption() {
-        return descryption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescryption(String descryption) {
-        this.descryption = descryption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getImgurl() {
-        return imgurl;
+    public String getImgURL() {
+        return imgURL;
     }
 
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

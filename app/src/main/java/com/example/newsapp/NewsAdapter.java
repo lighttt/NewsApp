@@ -1,5 +1,6 @@
 package com.example.newsapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @NonNull
     @Override
     public NewsAdapter.NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_news_item, parent, false);
         return new NewsViewHolder(view);
     }
 
@@ -42,11 +43,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(@NonNull NewsAdapter.NewsViewHolder holder, int position) {
         NewsItem news = mNewsItem.get(position);
         String title = news.getTitle();
-        String description = news.getDescryption();
-        String imgurl = news.getImgurl();
-        holder.titletext.setText(title);
-        holder.description.setText(String.valueOf(description));
-        Picasso.get().load(imgurl).into(holder.imgview);
+        String description = news.getDescription();
+        String imgurl = news.getImgURL();
+        String date = news.getDate();
+        String[] dateTime = date.split("T");
+        Log.e("The first date is", dateTime[0]);
+        Log.e("The second date is", dateTime[1]);
+        holder.tvTitle.setText(title);
+        holder.tvDescription.setText(String.valueOf(description));
+        String convertedDT = dateTime[0] + " " + dateTime[1].replace("Z","");
+        holder.tvDate.setText(convertedDT);
+        Picasso.get().load(imgurl).into(holder.ivNewsImg);
     }
 
     @Override
@@ -59,13 +66,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     public class NewsViewHolder extends RecyclerView.ViewHolder {
-        private TextView titletext, description;
-        private ImageView imgview;
+
+        private TextView tvTitle, tvDescription,tvDate;
+        private ImageView ivNewsImg;
+
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgview = itemView.findViewById(R.id.img_iv);
-            titletext = itemView.findViewById(R.id.title_tv);
-            description = itemView.findViewById(R.id.discryption_tv);
+            ivNewsImg = itemView.findViewById(R.id.img_iv);
+            tvTitle = itemView.findViewById(R.id.title_tv);
+            tvDate = itemView.findViewById(R.id.date_tv);
+            tvDescription = itemView.findViewById(R.id.discryption_tv);
         }
     }
 }

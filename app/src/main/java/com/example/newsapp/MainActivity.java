@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,29 +27,28 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
 
-    RecyclerView mrecycler;
+    RecyclerView mRecycler;
     NewsAdapter myNewsAdapter;
-    Context ctx = MainActivity.this;
     private TextView mErrorMessageDisplay;
     private static final int NEWS_LOADER_ID = 0;
-    private SpinKitView mLoadingindicator;
-    Context mcontext = MainActivity.this;
+    private SpinKitView mLoadingIndicator;
+    Context mContext = MainActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mrecycler = findViewById(R.id.recycler_view);
+        mRecycler = findViewById(R.id.recycler_view);
         mErrorMessageDisplay = findViewById(R.id.tv_error_message);
-        mLoadingindicator = findViewById(R.id.loading_indicator);
+        mLoadingIndicator = findViewById(R.id.loading_indicator);
         //set rv
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
-        mrecycler.setLayoutManager(gridLayoutManager);
-        mrecycler.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecycler.setLayoutManager(linearLayoutManager);
+        mRecycler.setHasFixedSize(true);
         List<NewsItem> news = new ArrayList<>();
         //adapter
         myNewsAdapter = new NewsAdapter(news);
-        mrecycler.setAdapter(myNewsAdapter);
+        mRecycler.setAdapter(myNewsAdapter);
 
         //initilizing the loader
         getSupportLoaderManager().initLoader(NEWS_LOADER_ID, null, this);
@@ -63,12 +61,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void showNewsDataView() {
         mErrorMessageDisplay.setVisibility(View.INVISIBLE);
-        mrecycler.setVisibility(View.VISIBLE);
+        mRecycler.setVisibility(View.VISIBLE);
     }
 
     private void showErrorMessage() {
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
-        mrecycler.setVisibility(View.INVISIBLE);
+        mRecycler.setVisibility(View.INVISIBLE);
     }
 
     @NonNull
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 if (mNewsData != null) {
                     deliverResult(mNewsData);
                 }
-                mLoadingindicator.setVisibility(View.VISIBLE);
+                mLoadingIndicator.setVisibility(View.VISIBLE);
                 // triggers the load in background function to load data
                 forceLoad();
             }
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Nullable
             @Override
             public List<NewsItem> loadInBackground() {
-                String location = LocationPrefrences.getPreferedWeatherLocation(mcontext);
+                String location = LocationPrefrences.getPreferedWeatherLocation(mContext);
                 URL newsRequestUrl = NetworkUtils.buildUrl(location);
                 List<NewsItem> newsDataFromJson = null;
                 try {
@@ -120,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(@NonNull Loader<List<NewsItem>> loader, List<NewsItem> data) {
 
-        mLoadingindicator.setVisibility(View.INVISIBLE);
+        mLoadingIndicator.setVisibility(View.INVISIBLE);
         myNewsAdapter.clearAll();
 
         // Add the movie data
@@ -147,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void showOfflineMessage() {
-        mrecycler.setVisibility(View.INVISIBLE);
+        mRecycler.setVisibility(View.INVISIBLE);
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 }

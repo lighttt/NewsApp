@@ -3,5 +3,5 @@
     <string name="title_news">Title</string>
     <string name="title_des">Description</string>
     <string name="title_date">Date</string>
-    <string name="error_message">Date</string>
+    <string name="error_message">Sorry we couldn\'t get the latest news.</string>
 </resources>

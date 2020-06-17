@@ -12,17 +12,18 @@ import java.util.List;
 public class OpenJsonNews {
     public static List<NewsItem> getWeatherDataFromJson(Context context, String jsonNewsResponse) throws JSONException {
         final String NEWS_MESSAGE_CODE = "status";
-        final String OWM_DESCRYPTION = "description";
-        final String OWM_TITLE = "title";
-        final String OWM_IMAGEURL = "urlToImage";
-        final String OWM_ARTICLE = "articles";
+        final String NEWS_DESCRIPTION = "description";
+        final String NEWS_TITLE = "title";
+        final String NEWS_IMG_URL = "urlToImage";
+        final String NEWS_ARTICLES = "articles";
+        final String NEWS_DATE = "publishedAt";
 
-        List<NewsItem> arrmodel = new ArrayList<>();
+        List<NewsItem> newsItemArrayList = new ArrayList<>();
 
         JSONObject jsonObject = new JSONObject(jsonNewsResponse);
         if (jsonObject.has(NEWS_MESSAGE_CODE)) {
-            String errorcode = jsonObject.getString(NEWS_MESSAGE_CODE);
-            switch (errorcode) {
+            String errorCode = jsonObject.getString(NEWS_MESSAGE_CODE);
+            switch (errorCode) {
                 case "ok":
                     break;
                 case "error":
@@ -34,44 +35,40 @@ public class OpenJsonNews {
             }
         }
 
-        JSONArray NewsArray = jsonObject.getJSONArray(OWM_ARTICLE);
+        JSONArray NewsArray = jsonObject.getJSONArray(NEWS_ARTICLES);
         for (int i = 0; i < NewsArray.length(); i++) {
-            String title;
-            String description;
-            String imageurl;
 
-            JSONObject newsobj = NewsArray.getJSONObject(i);
+            JSONObject newsObject = NewsArray.getJSONObject(i);
 
             String originalTitle = null;
-            if (newsobj.has(OWM_TITLE)) {
+            if (newsObject.has(NEWS_TITLE)) {
                 // Extract the value for the key called "original_title"
-                originalTitle = newsobj.getString(OWM_TITLE);
+                originalTitle = newsObject.getString(NEWS_TITLE);
             }
 
 
             String originalDes = null;
-            if (newsobj.has(OWM_DESCRYPTION)) {
+            if (newsObject.has(NEWS_DESCRIPTION)) {
                 // Extract the value for the key called "original_description"
-                originalDes = newsobj.getString(OWM_DESCRYPTION);
+                originalDes = newsObject.getString(NEWS_DESCRIPTION);
             }
 
             String imgurl = null;
-            if (newsobj.has(OWM_IMAGEURL)) {
-                // Extract the value for the key called "original_description"
-                imgurl = newsobj.getString(OWM_IMAGEURL);
+            if (newsObject.has(NEWS_IMG_URL)) {
+                // Extract the value for the key called "imgurl"
+                imgurl = newsObject.getString(NEWS_IMG_URL);
+            }
+            String date = null;
+            if (newsObject.has(NEWS_DATE)) {
+                // Extract the value for the key called "imgurl"
+                date = newsObject.getString(NEWS_DATE);
             }
 
-
             // Create a new {@link Movie} object
-            NewsItem news = new NewsItem(originalTitle,originalDes,imgurl);
+            NewsItem news = new NewsItem(originalTitle,originalDes,imgurl,date);
             // Add the new {@link Movie} to the list of movies
-            arrmodel.add(news);
-
+            newsItemArrayList.add(news);
         }
-
-
-        return  arrmodel;
-
-
+        return  newsItemArrayList;
     }
 }
